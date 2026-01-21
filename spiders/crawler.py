@@ -8,7 +8,7 @@ class CrawlerSpider(scrapy.Spider):
     name = "crawler"
     allowed_domains = ["www.lacoste.com", "algolia.net", "cu0iyshi42-dsn.algolia.net"]
 
-    QUERIES = ["Sneakers", "Polo", "T-Shirts"] # you can add or remove what you want
+    QUERIES = ["T-Shirts"] # you can add or remove what you want
     LANGUAGE = "products_de_de" # Or you can enter products_en_us for example if you have proxies or live in US
 
     headers = {
@@ -64,10 +64,11 @@ class CrawlerSpider(scrapy.Spider):
         items = info["results"][0]["hits"]
         if not info.get('results')[0].get('hits'):
             current_query += 1
+            if current_query >= len(self.QUERIES):
+                raise CloseSpider('End.')
             self.params_dict["query"]= self.QUERIES[current_query]
             self.params_dict["page"] = 0
 
-            # raise CloseSpider('No more products found')
 
         for item in items:
             try:
