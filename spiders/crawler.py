@@ -8,7 +8,7 @@ class CrawlerSpider(scrapy.Spider):
     name = "crawler"
     allowed_domains = ["www.lacoste.com", "algolia.net", "cu0iyshi42-dsn.algolia.net"]
 
-    QUERIES = ["T-Shirts"] # you can add or remove what you want
+    QUERIES = ["Polo", "Sneakers", "T-Shirts"] # you can add or remove what you want
     LANGUAGE = "products_de_de" # Or you can enter products_en_us for example if you have proxies or live in US
 
     headers = {
